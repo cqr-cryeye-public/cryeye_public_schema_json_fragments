@@ -8,7 +8,6 @@ For simpler usage, you can use "json-schema" for validation of "fragments" schem
 
 ## Usage
 
-
 ### 🌐 By url
 
 Add to the top of your "yaml" file something like this:
@@ -21,7 +20,30 @@ So, this will be something like this:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/cqr-cryeye-public/cryeye_public_schema_json_fragments/v0.1.0/schema/fragments.schema.json
+---
+engine:
+  version: 0.1.0
+meta:
+  version: 1.0.0
+schema:
+  fragments:
+    - type: many
+      getter: { type: nested, query: values }
+      config:
+        info: { title: Value, description: Extracted values }
+        fields:
+          - { key: value, type: text }
 ```
+
+Note:
+
+If you use JetBrains IDE, and need to reload used schema for file, you can restart the IDE. Or, you can make this:
+
+1. In JetBrains IDE, go to: `File` -> `Invalidate Caches...`.
+2. Click "Just Restart" button.
+
+After this, all instances of IDE will be restarted.
+
 
 ### 📝 By file
 
