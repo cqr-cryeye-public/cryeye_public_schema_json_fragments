@@ -21,10 +21,8 @@ So, this will be something like this:
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/cqr-cryeye-public/cryeye_public_schema_json_fragments/v0.1.0/schema/fragments.schema.json
 ---
-engine:
-  version: 0.1.0
-meta:
-  version: 1.0.0
+engine: { version: 0.1.0 }
+meta: { version: 1.0.1 }
 schema:
   fragments:
     - type: many
@@ -44,7 +42,6 @@ If you use JetBrains IDE, and need to reload used schema for file, you can resta
 
 After this, all instances of IDE will be restarted.
 
-
 ### 📝 By file
 
 Place somewhere file with `fragments.schema.json`.
@@ -60,3 +57,4 @@ Place somewhere file with `fragments.schema.json`.
 8. Add pattern `*/schema.yaml`.
 
 9. Click "Accept" and/or "OK" to close the settings window.
+
