@@ -1,0 +1,1164 @@
+{
+    "$defs": {
+        "ConvertType": {
+            "enum": [
+                "int",
+                "float",
+                "bool",
+                "str"
+            ],
+            "title": "ConvertType",
+            "type": "string"
+        },
+        "DataConfig": {
+            "properties": {
+                "info": {
+                    "$ref": "#/$defs/InfoConfig"
+                },
+                "fields": {
+                    "items": {
+                        "$ref": "#/$defs/FieldConfig"
+                    },
+                    "title": "Fields",
+                    "type": "array"
+                },
+                "handle_no_items": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/HandleNoItems"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "pagination_config": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PaginationConfig"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "sort_config": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SortConfig"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "details": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "discriminator": {
+                                    "mapping": {
+                                        "auto": "#/$defs/DetailsBlockIAuto",
+                                        "card_info": "#/$defs/DetailsBlockICardInfo",
+                                        "table": "#/$defs/DetailsBlockITable"
+                                    },
+                                    "propertyName": "type"
+                                },
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/$defs/DetailsBlockIAuto"
+                                    },
+                                    {
+                                        "$ref": "#/$defs/DetailsBlockICardInfo"
+                                    },
+                                    {
+                                        "$ref": "#/$defs/DetailsBlockITable"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Details"
+                }
+            },
+            "required": [
+                "info",
+                "fields"
+            ],
+            "title": "DataConfig",
+            "type": "object"
+        },
+        "DataConfigIDetailsAuto": {
+            "properties": {
+                "info": {
+                    "$ref": "#/$defs/InfoConfig"
+                },
+                "fields": {
+                    "items": {
+                        "$ref": "#/$defs/FieldConfig"
+                    },
+                    "title": "Fields",
+                    "type": "array"
+                }
+            },
+            "required": [
+                "info",
+                "fields"
+            ],
+            "title": "DataConfigIDetailsAuto",
+            "type": "object"
+        },
+        "DataConfigIDetailsCardInfo": {
+            "properties": {
+                "info": {
+                    "$ref": "#/$defs/InfoConfig"
+                },
+                "fields": {
+                    "items": {
+                        "$ref": "#/$defs/FieldConfig"
+                    },
+                    "title": "Fields",
+                    "type": "array"
+                }
+            },
+            "required": [
+                "info",
+                "fields"
+            ],
+            "title": "DataConfigIDetailsCardInfo",
+            "type": "object"
+        },
+        "DataConfigIDetailsTable": {
+            "properties": {
+                "info": {
+                    "$ref": "#/$defs/InfoConfig"
+                },
+                "fields": {
+                    "items": {
+                        "$ref": "#/$defs/FieldConfig"
+                    },
+                    "title": "Fields",
+                    "type": "array"
+                },
+                "handle_no_items": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/HandleNoItems"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "pagination_config": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PaginationConfig"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "sort_config": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SortConfig"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "details": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/$defs/DetailsBlockIAuto"
+                                    },
+                                    {
+                                        "$ref": "#/$defs/DetailsBlockICardInfo"
+                                    },
+                                    {
+                                        "$ref": "#/$defs/DetailsBlockITable"
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Details"
+                }
+            },
+            "required": [
+                "info",
+                "fields"
+            ],
+            "title": "DataConfigIDetailsTable",
+            "type": "object"
+        },
+        "DataFieldType": {
+            "enum": [
+                "text",
+                "text_long",
+                "href",
+                "number",
+                "boolean",
+                "enum",
+                "datetime",
+                "array",
+                "image_url",
+                "size_bytes"
+            ],
+            "title": "DataFieldType",
+            "type": "string"
+        },
+        "DetailsBlockIAuto": {
+            "description": "\n    Details block. Table.\n    ",
+            "properties": {
+                "type": {
+                    "const": "auto",
+                    "title": "Type"
+                },
+                "getter": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter"
+                },
+                "config": {
+                    "$ref": "#/$defs/DataConfigIDetailsAuto"
+                },
+                "optional": {
+                    "default": false,
+                    "title": "Optional",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "getter",
+                "config"
+            ],
+            "title": "DetailsBlockIAuto",
+            "type": "object"
+        },
+        "DetailsBlockICardInfo": {
+            "description": "\n    Details block. Table.\n    ",
+            "properties": {
+                "type": {
+                    "const": "card_info",
+                    "title": "Type"
+                },
+                "getter": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter"
+                },
+                "config": {
+                    "$ref": "#/$defs/DataConfigIDetailsCardInfo"
+                },
+                "optional": {
+                    "default": false,
+                    "title": "Optional",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "getter",
+                "config"
+            ],
+            "title": "DetailsBlockICardInfo",
+            "type": "object"
+        },
+        "DetailsBlockITable": {
+            "description": "\n    Details block. Table.\n    ",
+            "properties": {
+                "type": {
+                    "const": "table",
+                    "title": "Type"
+                },
+                "getter": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter"
+                },
+                "config": {
+                    "$ref": "#/$defs/DataConfigIDetailsTable"
+                },
+                "optional": {
+                    "default": false,
+                    "title": "Optional",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "getter",
+                "config"
+            ],
+            "title": "DetailsBlockITable",
+            "type": "object"
+        },
+        "EngineConfig": {
+            "description": "\n    Engine config.\n    Information about the engine this schema relies on.\n\n    Attributes:\n        version: str - version of engine.\n    ",
+            "properties": {
+                "version": {
+                    "title": "Version",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "version"
+            ],
+            "title": "EngineConfig",
+            "type": "object"
+        },
+        "FieldConfig": {
+            "description": "\n    Field config for data config.\n\n    Attributes:\n        key: str - key inside dict/JSON object (if used default getter). Also - id for this field.\n        label: str - label for this field. Human-readable.\n        type: DataFieldType - type for this field. Affected on visualization, filter.\n\n        description: str | None - description about this field.\n        getter: str | None - getter for this field. If None - use default getter.\n\n        optional: bool - is this field optional? If True - field can be \"None\" or not exist.\n    ",
+            "properties": {
+                "key": {
+                    "title": "Key",
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/DataFieldType"
+                },
+                "label": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Label"
+                },
+                "description": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Description"
+                },
+                "optional": {
+                    "default": false,
+                    "title": "Optional",
+                    "type": "boolean"
+                },
+                "getter": {
+                    "anyOf": [
+                        {
+                            "discriminator": {
+                                "mapping": {
+                                    "map": "#/$defs/GetterIMap",
+                                    "nested": "#/$defs/GetterINested",
+                                    "self": "#/$defs/GetterISelf"
+                                },
+                                "propertyName": "type"
+                            },
+                            "oneOf": [
+                                {
+                                    "$ref": "#/$defs/GetterINested"
+                                },
+                                {
+                                    "$ref": "#/$defs/GetterISelf"
+                                },
+                                {
+                                    "$ref": "#/$defs/GetterIMap"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Getter"
+                },
+                "transform": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TransformConfig"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                }
+            },
+            "required": [
+                "key",
+                "type"
+            ],
+            "title": "FieldConfig",
+            "type": "object"
+        },
+        "GetterIMap": {
+            "description": "\n    Getter. Get data from list. As input - only list allowed.\n\n    Attributes:\n        type: discriminator.\n\n    ",
+            "properties": {
+                "type": {
+                    "const": "map",
+                    "title": "Type"
+                },
+                "getter_outer": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter Outer"
+                },
+                "getter_inner": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter Inner"
+                }
+            },
+            "required": [
+                "type",
+                "getter_outer",
+                "getter_inner"
+            ],
+            "title": "GetterIMap",
+            "type": "object"
+        },
+        "GetterINested": {
+            "description": "\n    Getter. Get nested data.\n\n    As input - only JSON-like dict allowed.\n\n    Attributes:\n        type: discriminator.\n\n        query: str - query for getter. For now - only strings, separated by dot (\".\").\n            For example:\n                Source data: {\"user\": {\"name\": \"John\"}}\n                Query: \"user.name\".\n                Result: \"John\".\n\n    ",
+            "properties": {
+                "type": {
+                    "const": "nested",
+                    "title": "Type"
+                },
+                "query": {
+                    "title": "Query",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "query"
+            ],
+            "title": "GetterINested",
+            "type": "object"
+        },
+        "GetterISelf": {
+            "description": "\n    Getter. Get self data. As input - any value allowed.\n\n    Attributes:\n        type: discriminator.\n    ",
+            "properties": {
+                "type": {
+                    "const": "self",
+                    "title": "Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "GetterISelf",
+            "type": "object"
+        },
+        "HandleNoItems": {
+            "description": "\n    Config for handling no items.\n\n    Attributes:\n        message: str | None - which message to show when no items. Also used in filters.\n            If \"None\" (Not set), then use default message.\n\n        is_hide: bool - whether to hide table when no items.\n    ",
+            "properties": {
+                "message": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Message"
+                },
+                "is_hide": {
+                    "default": false,
+                    "title": "Is Hide",
+                    "type": "boolean"
+                }
+            },
+            "title": "HandleNoItems",
+            "type": "object"
+        },
+        "InfoConfig": {
+            "description": "\n    Info config for data config.\n\n    Attributes:\n        title: str - title for this data.\n        title_plural: str - plural title for this data.\n        description: str - description about this data.\n    ",
+            "properties": {
+                "title": {
+                    "title": "Title",
+                    "type": "string"
+                },
+                "title_plural": {
+                    "default": "",
+                    "title": "Title Plural",
+                    "type": "string"
+                },
+                "description": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Description"
+                },
+                "slug": {
+                    "default": "",
+                    "title": "Slug",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "title": "InfoConfig",
+            "type": "object"
+        },
+        "JsonType": {
+            "enum": [
+                "dump",
+                "load"
+            ],
+            "title": "JsonType",
+            "type": "string"
+        },
+        "MathType": {
+            "enum": [
+                "add",
+                "subtract",
+                "multiply",
+                "divide"
+            ],
+            "title": "MathType",
+            "type": "string"
+        },
+        "PaginationConfig": {
+            "description": "\n    Pagination config. How to paginate items.\n    ",
+            "properties": {
+                "items_per_page_recommended": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Items Per Page Recommended"
+                },
+                "min_per_page": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Min Per Page"
+                }
+            },
+            "title": "PaginationConfig",
+            "type": "object"
+        },
+        "RoundType": {
+            "enum": [
+                "up",
+                "down",
+                "default"
+            ],
+            "title": "RoundType",
+            "type": "string"
+        },
+        "SchemaConfig": {
+            "description": "\n    Schema config.\n    ",
+            "properties": {
+                "fragments": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SchemaFragmentIMany"
+                            },
+                            {
+                                "$ref": "#/$defs/SchemaFragmentIOne"
+                            }
+                        ]
+                    },
+                    "title": "Fragments",
+                    "type": "array"
+                }
+            },
+            "required": [
+                "fragments"
+            ],
+            "title": "SchemaConfig",
+            "type": "object"
+        },
+        "SchemaFragmentIMany": {
+            "description": "\n    Schema fragment.\n    ",
+            "properties": {
+                "type": {
+                    "const": "many",
+                    "title": "Type"
+                },
+                "getter": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter"
+                },
+                "config": {
+                    "$ref": "#/$defs/DataConfig"
+                },
+                "optional": {
+                    "default": false,
+                    "title": "Optional",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "getter",
+                "config"
+            ],
+            "title": "SchemaFragmentIMany",
+            "type": "object"
+        },
+        "SchemaFragmentIOne": {
+            "description": "\n    Schema fragment.\n    ",
+            "properties": {
+                "type": {
+                    "const": "one",
+                    "title": "Type"
+                },
+                "getter": {
+                    "discriminator": {
+                        "mapping": {
+                            "nested": "#/$defs/GetterINested",
+                            "self": "#/$defs/GetterISelf"
+                        },
+                        "propertyName": "type"
+                    },
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/GetterINested"
+                        },
+                        {
+                            "$ref": "#/$defs/GetterISelf"
+                        }
+                    ],
+                    "title": "Getter"
+                },
+                "config": {
+                    "$ref": "#/$defs/DataConfig"
+                },
+                "optional": {
+                    "default": false,
+                    "title": "Optional",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "type",
+                "getter",
+                "config"
+            ],
+            "title": "SchemaFragmentIOne",
+            "type": "object"
+        },
+        "SchemaMeta": {
+            "description": "\n    Schema meta.\n    Information about schema itself.\n\n    Attributes:\n        version: str - version of schema.\n        custom: Any | None - custom data. Not used by engine.\n    ",
+            "properties": {
+                "version": {
+                    "title": "Version",
+                    "type": "string"
+                },
+                "custom": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Custom"
+                }
+            },
+            "required": [
+                "version"
+            ],
+            "title": "SchemaMeta",
+            "type": "object"
+        },
+        "SortConfig": {
+            "description": "\n    Sort config. How to sort items.\n\n    Attributes:\n        sort_by: str | None - key from fields.\n        sort_desc: bool | None - sort descending (if True, then sort from max to min).\n    ",
+            "properties": {
+                "sort_by": {
+                    "title": "Sort By",
+                    "type": "string"
+                },
+                "sort_desc": {
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Sort Desc"
+                }
+            },
+            "required": [
+                "sort_by"
+            ],
+            "title": "SortConfig",
+            "type": "object"
+        },
+        "StringType": {
+            "enum": [
+                "lowercase",
+                "uppercase",
+                "capitalize",
+                "titleize",
+                "strip"
+            ],
+            "title": "StringType",
+            "type": "string"
+        },
+        "TransformConfig": {
+            "description": "\n    Transform config.\n\n    Attributes:\n        default: Any | None - default value for this field.\n            If getter does not find value, then this value will be used. By default \u2014 \"None\".\n\n        is_send_default_to_pipeline: bool - is sent default value to pipeline?\n            If \"True\", then the default value will also be sent to the pipeline.\n\n        pipeline: list - pipeline for this field. List of transformers, which will be applied to this field.\n    ",
+            "properties": {
+                "default": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Default"
+                },
+                "is_send_default_to_pipeline": {
+                    "default": false,
+                    "title": "Is Send Default To Pipeline",
+                    "type": "boolean"
+                },
+                "pipeline": {
+                    "items": {
+                        "discriminator": {
+                            "mapping": {
+                                "convert": "#/$defs/TransformerIConvert",
+                                "extract_by_regex": "#/$defs/TransformerIExtractByRegex",
+                                "json": "#/$defs/TransformerIJson",
+                                "math": "#/$defs/TransformerIMath",
+                                "replace_by_regex": "#/$defs/TransformerIReplaceByRegex",
+                                "replace_by_text": "#/$defs/TransformerIReplaceByText",
+                                "round": "#/$defs/TransformerIRound",
+                                "string": "#/$defs/TransformerIString",
+                                "template": "#/$defs/TransformerITemplate",
+                                "truncate": "#/$defs/TransformerITruncate"
+                            },
+                            "propertyName": "type"
+                        },
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/TransformerIConvert"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIJson"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIMath"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIRound"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIReplaceByRegex"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIReplaceByText"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIExtractByRegex"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerIString"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerITemplate"
+                            },
+                            {
+                                "$ref": "#/$defs/TransformerITruncate"
+                            }
+                        ]
+                    },
+                    "title": "Pipeline",
+                    "type": "array"
+                }
+            },
+            "title": "TransformConfig",
+            "type": "object"
+        },
+        "TransformerIConvert": {
+            "description": "\n    Transformer. Convert data to another type.\n\n    Attributes:\n        type: discriminator.\n\n        to: str - type for converting.\n    ",
+            "properties": {
+                "type": {
+                    "const": "convert",
+                    "title": "Type"
+                },
+                "to": {
+                    "$ref": "#/$defs/ConvertType"
+                }
+            },
+            "required": [
+                "type",
+                "to"
+            ],
+            "title": "TransformerIConvert",
+            "type": "object"
+        },
+        "TransformerIExtractByRegex": {
+            "description": "\n    Transformer. Extract data by regex.\n    ",
+            "properties": {
+                "type": {
+                    "const": "extract_by_regex",
+                    "title": "Type"
+                },
+                "regex": {
+                    "title": "Regex",
+                    "type": "string"
+                },
+                "group_name": {
+                    "title": "Group Name",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "regex",
+                "group_name"
+            ],
+            "title": "TransformerIExtractByRegex",
+            "type": "object"
+        },
+        "TransformerIJson": {
+            "description": "\n    Transformer. Convert data to JSON or from JSON.\n\n    Attributes:\n        type: discriminator.\n\n        operation: str - operation for converting.\n    ",
+            "properties": {
+                "type": {
+                    "const": "json",
+                    "title": "Type"
+                },
+                "operation": {
+                    "$ref": "#/$defs/JsonType"
+                }
+            },
+            "required": [
+                "type",
+                "operation"
+            ],
+            "title": "TransformerIJson",
+            "type": "object"
+        },
+        "TransformerIMath": {
+            "description": "\n    Transformer. Do math operations.\n\n    Attributes:\n        type: discriminator.\n\n        operation: str - operation for math.\n    ",
+            "properties": {
+                "type": {
+                    "const": "math",
+                    "title": "Type"
+                },
+                "operation": {
+                    "$ref": "#/$defs/MathType"
+                },
+                "value": {
+                    "title": "Value"
+                }
+            },
+            "required": [
+                "type",
+                "operation",
+                "value"
+            ],
+            "title": "TransformerIMath",
+            "type": "object"
+        },
+        "TransformerIReplaceByRegex": {
+            "description": "\n    Transformer. Replace data by regex.\n    ",
+            "properties": {
+                "type": {
+                    "const": "replace_by_regex",
+                    "title": "Type"
+                },
+                "regex": {
+                    "title": "Regex",
+                    "type": "string"
+                },
+                "new": {
+                    "title": "New",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "regex",
+                "new"
+            ],
+            "title": "TransformerIReplaceByRegex",
+            "type": "object"
+        },
+        "TransformerIReplaceByText": {
+            "description": "\n    Transformer. Replace data by text.\n    ",
+            "properties": {
+                "type": {
+                    "const": "replace_by_text",
+                    "title": "Type"
+                },
+                "text": {
+                    "title": "Text",
+                    "type": "string"
+                },
+                "new": {
+                    "title": "New",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "text",
+                "new"
+            ],
+            "title": "TransformerIReplaceByText",
+            "type": "object"
+        },
+        "TransformerIRound": {
+            "description": "\n    Transformer. Round data.\n\n    Attributes:\n        type: discriminator.\n\n        to: str - type for converting.\n    ",
+            "properties": {
+                "type": {
+                    "const": "round",
+                    "title": "Type"
+                },
+                "operation": {
+                    "$ref": "#/$defs/RoundType"
+                },
+                "precision": {
+                    "title": "Precision",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "type",
+                "operation",
+                "precision"
+            ],
+            "title": "TransformerIRound",
+            "type": "object"
+        },
+        "TransformerIString": {
+            "description": "\n    Transformer. String data.\n\n    Attributes:\n        type: discriminator.\n\n        to: str - type for converting.\n    ",
+            "properties": {
+                "type": {
+                    "const": "string",
+                    "title": "Type"
+                },
+                "operation": {
+                    "$ref": "#/$defs/StringType"
+                }
+            },
+            "required": [
+                "type",
+                "operation"
+            ],
+            "title": "TransformerIString",
+            "type": "object"
+        },
+        "TransformerITemplate": {
+            "description": "\n    Transformer. Insert data into template.\n\n    Use \"jinja2\" templates. At least, use \"double curly braces\" for substitutions.\n    ",
+            "properties": {
+                "type": {
+                    "const": "template",
+                    "title": "Type"
+                },
+                "template": {
+                    "title": "Template",
+                    "type": "string"
+                },
+                "key_for_value": {
+                    "title": "Key For Value",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "template",
+                "key_for_value"
+            ],
+            "title": "TransformerITemplate",
+            "type": "object"
+        },
+        "TransformerITruncate": {
+            "description": "\n    Transformer. Truncate data.\n\n    Attributes:\n        type: discriminator.\n    ",
+            "properties": {
+                "type": {
+                    "const": "truncate",
+                    "title": "Type"
+                },
+                "max_length": {
+                    "title": "Max Length",
+                    "type": "integer"
+                },
+                "position": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/TruncateType"
+                        }
+                    ],
+                    "default": "right"
+                },
+                "placeholder": {
+                    "default": "...",
+                    "title": "Placeholder",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "max_length"
+            ],
+            "title": "TransformerITruncate",
+            "type": "object"
+        },
+        "TruncateType": {
+            "enum": [
+                "left",
+                "right",
+                "middle"
+            ],
+            "title": "TruncateType",
+            "type": "string"
+        }
+    },
+    "description": "\n    Result schema for audit.\n    Use with AuditResult.\n    ",
+    "properties": {
+        "meta": {
+            "$ref": "#/$defs/SchemaMeta"
+        },
+        "engine": {
+            "$ref": "#/$defs/EngineConfig"
+        },
+        "schema": {
+            "$ref": "#/$defs/SchemaConfig"
+        }
+    },
+    "required": [
+        "meta",
+        "engine",
+        "schema"
+    ],
+    "title": "ResultSchema",
+    "type": "object"
+}
